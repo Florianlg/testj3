@@ -1,0 +1,9 @@
+@use './reset';
+@use './fonts';
+@use './variables' as v;
+
+body {
+  color: v.$color-darkest;
+  font-family: v.$font-sans;
+  font-weight: 400;
+}

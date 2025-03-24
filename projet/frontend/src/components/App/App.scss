@@ -1,0 +1,88 @@
+@use '../styles/functions' as f;
+@use '../styles/variables' as v;
+
+.app {
+  background: v.$color-lightest;
+  height: 100vh;
+  padding: v.$gutter * 3;
+}
+
+h2 {
+  font-size: f.rem(34px);
+  font-weight: 400;
+  line-height: v.$gutter * 3;
+  margin-bottom: v.$gutter;
+  text-transform: capitalize;
+}
+
+h3 {
+  font-size: f.rem(21px);
+  margin-right: v.$gutter * 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+p {
+  font-size: 1rem;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+input {
+  height: v.$gutter * 1.5;
+  line-height: v.$gutter * 1.5;
+  
+  &[name="qty"] {
+    border: 1px solid rgba(v.$color-light, .3);
+    width: 2.5rem;
+  }
+}
+
+button {
+  background: v.$color-lightest;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  color: v.$color-darkest;
+  cursor: pointer;
+  transition: background-color 0.3s linear, color 0.3s linear;
+
+  &:hover {
+    background: v.$color-darkest;
+    color: v.$color-lightest;
+  }
+
+  &.big {
+    font-size: f.rem(26px);
+    line-height: calc(v.$gutter * 4 - 2px);
+    padding: 0 v.$gutter * 2;
+  }
+
+  &.delete {
+    border-color: transparent;
+    color: rgba(v.$color-light, .3);
+    font-weight: 700;
+
+    &:hover {
+      background: inherit;
+      color: v.$color-danger;
+    }
+  }
+}
+
+.full-click {
+  position: relative;
+
+  span[aria-hidden="true"] {
+    inset: 0;
+    position: absolute;
+  }
+
+  a,
+  button {
+    position: relative;
+  }
+}

@@ -1,0 +1,21 @@
+@use '../../../styles/functions' as f;
+@use '../../../styles/variables' as v;
+
+.header {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+
+  img {
+    height: v.$gutter * 4.5;
+  }
+
+  h1 {
+    font-size: f.rem(34px);
+    font-weight: 400;
+    line-height: v.$gutter * 3;
+    margin-bottom: v.$gutter * 3;
+  }
+}

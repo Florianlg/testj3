@@ -1,0 +1,58 @@
+version: '3.8'  # Version de Docker Compose utilisée
+
+services:  # Déclaration des services (containers)
+
+  frontend:  # Service pour le frontend (ex : application React/Vite)
+    build:
+      context: ./frontend  # Dockerfile situé dans le dossier ./frontend
+    volumes:
+      - ./frontend:/app/frontend  # Synchronise les fichiers entre l'hôte et le container
+    depends_on:
+      - backend  # Lance le frontend après que le backend ait démarré
+    environment:
+      - VITE_API_URL=http://localhost:3000  # URL de l’API à utiliser dans l’app frontend
+    ports:
+      - "5173:5173"  # Mappe le port 5173 de l’hôte vers le port 5173 du container (port par défaut de Vite)
+    command: npm run dev  # Démarre le serveur de développement du frontend
+
+  backend:  # Service pour le backend (ex : Node.js/Express)
+    build:
+      context: ./backend  # Dockerfile situé dans le dossier ./backend
+    volumes:
+      - ./backend:/app/backend  # Synchronise les fichiers entre l'hôte et le container
+    ports:
+      - "3000:3000"  # Mappe le port 3000 de l’hôte vers le port 3000 du container (port typique d’une API)
+    environment:
+      - PGUSER=oclock  # Identifiant PostgreSQL
+      - PGPASSWORD=passw0rd  # Mot de passe PostgreSQL
+      - PGHOST=database  # Nom du service de la base de données (Docker résout ce nom automatiquement)
+      - PGPORT=5432  # Port utilisé pour accéder à PostgreSQL
+      - PGDATABASE=shop  # Nom de la base de données utilisée
+    depends_on:
+      - database  # Le backend attend que la base de données soit démarrée
+    tty: true  # Active un terminal interactif (utile pour garder le container ouvert dans certains cas)
+    command: npm run dev  # Démarre le serveur de développement du backend
+
+  database:  # Service pour la base de données PostgreSQL avec PostGIS
+    image: postgis/postgis:13-master  # Image officielle avec extension PostGIS (utile pour les données géographiques)
+    container_name: database  # Nom explicite du container
+    volumes:
+      - ./backend/data/database:/var/lib/postgresql/data  # Persistance des données de la base
+      - ./backend/init.sql:/docker-entrypoint-initdb.d/init.sql  # Script SQL exécuté à l’initialisation
+    ports:
+      - 5432:5432  # Mappe le port PostgreSQL pour accès depuis l’extérieur
+    environment:
+      POSTGRES_USER: 'oclock'  # Identifiant PostgreSQL
+      POSTGRES_PASSWORD: 'passw0rd'  # Mot de passe PostgreSQL
+      POSTGRES_DB: 'shop'  # Nom de la base à créer automatiquement
+    restart: always  # Redémarrage automatique en cas de crash
+    tty: true  # Terminal interactif activé
+
+  adminer:  # Service pour Adminer (interface web de gestion de BDD)
+    image: adminer  # Image officielle d’Adminer
+    ports:
+      - 8080:8080  # Interface disponible sur http://localhost:8080
+    restart: always  # Redémarrage automatique en cas de crash
+    depends_on:
+      - database  # Démarre après la base de données
+    tty: true  # Terminal interactif activé (facultatif ici)

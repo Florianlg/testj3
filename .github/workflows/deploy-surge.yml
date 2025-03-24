@@ -1,0 +1,35 @@
+name: Deploy to Surge
+
+on:
+  workflow_dispatch:
+  push:
+    branches: "main"
+
+jobs:
+  build:
+    environment: production
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projet/frontend
+        shell: bash
+    steps:
+      #Etape 1 : je récupère le contenu de mon dépôt
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      #Etape 2: j'installe les dépendances
+      - name: Install-dependencies
+        run: npm ci #ci = clean install
+
+      - name: Build
+        run: npm run build
+
+      # Installation de surge
+      # Déploiment s'opère sur le dossier /dist
+      # On définit un nom de domaine fixe : cda-correction-j2.surge.sh
+      # Gestion du token
+      - name: Deploy
+        run: |
+          npm install -g surge
+          surge ./dist --domain cda-correction-j2.surge.sh --token ${{ secrets.SURGE_TOKEN }}

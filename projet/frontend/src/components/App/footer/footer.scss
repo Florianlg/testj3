@@ -1,0 +1,7 @@
+@use '../../../styles/variables' as v;
+
+.footer {
+  color: v.$color-light;
+  padding: 0 v.$gutter;
+  text-align: right;
+}

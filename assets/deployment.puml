@@ -1,0 +1,26 @@
+node "Client" as client {
+    [VSCode]
+}
+
+node "Github" as gh {
+    [Remote repository] as repo
+    node "Workflow" as workflow {
+        [Build]
+        [Test]
+        artifact Deploy
+    }
+}
+
+node "Front" as front {
+    [Surge]
+}
+node "Api" as api {
+    [DummyJson]
+}
+
+VSCode --> repo : commit & push
+repo --> Build : on push to master
+Build --> Test : on build success
+Test --> Deploy : on test success
+Deploy --> Surge
+Surge <--> DummyJson

@@ -1,0 +1,92 @@
+# Cahier des charges
+
+**Société**  localexpress
+
+**Objectif** faire de la livraison de courses à domicile
+
+## Description 
+
+Nous voulons une application web qui permet de commander des produits et de se faire livrer à domicile. Nous ne vendons que quelques produits, qui changent chaque semaine. Il n'est pas nécessaire d'avoir d'historique de commande.
+
+Pour nous démarquer, nous souhaitons :
+
+- Une interface simple, sans navigation. Les produits sont tous sur la même page, simplement rangés par catégories (a-z).
+- Compatible smartphone
+- Nous privilégions le contact humain
+    * paiement à la livraison
+    * facture papier (non gérée par l'application)
+    * le livreur fera du teasing sur les produits à venir
+
+Nous n'avons pas de contrainte sur la technologie utilisée. Il nous faudra juste un back-office pour gérer les produits et voir les commandes.
+
+## Interface
+
+Voici une idée de l'interface que nous imaginons. Nous ne sommes pas designers, donc n'hésitez pas à nous proposer des améliorations, car nous aimons vos réalisations.
+
+Page d'acceuil :
+
+image::./assets/w1.png[interface]
+
+Page de sélection des produits :
+
+image::./assets/w2.png[interface]
+
+Détail d'un produit :
+
+image::./assets/w3.png[interface]
+
+Finalisation d'une commande :
+
+image::./assets/w4.png[interface]
+
+Commande validée :
+
+image::./assets/w5.png[interface]
+
+## Maquettes et zonage
+
+https://github.com/O-clock-Ryu/S03-Challenge-Florianlg/blob/master/assets/zonage.png
+
+## Conception
+
+### User stories
+
+En tant que client :
+- Voir la liste des produits disponibles
+- Voir le détail d'un produit
+- Ajouter un produit au panier
+- Modifier la quantité d'un produit ajotué au panier
+- Supprimer un produit du panier
+- Vider le panier
+- Voir le montant total du panier
+- Valider ma commande
+
+En tant que commerçant :
+- Ajouter un produit
+- Modifier un produit
+- Supprimer un produit
+- Voir les commandes en cours
+
+### Cas d’utilisation
+
+https://github.com/O-clock-Ryu/S03-Challenge-Florianlg/blob/master/assets/erd.PNG
+
+### Diagramme d’entité-association
+
+https://github.com/O-clock-Ryu/S03-Challenge-Florianlg/blob/master/assets/entites-relations.PNG
+
+### Diagramme de séquence
+
+https://github.com/O-clock-Ryu/S03-Challenge-Florianlg/blob/master/assets/sequence.PNG
+
+### Diagramme d’activité
+
+https://github.com/O-clock-Ryu/S03-Challenge-Florianlg/blob/master/assets/activit%C3%A9s.PNG
+
+### Diagramme de déploiement
+
+TODO
+
+### Schéma d'architecture
+
+TODO
